@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import VideoPreview from "./preview";
+import VideoDownload from "./videodownload"
+
 
 function UploadVideos() {
   const [videos, setVideos] = useState([]);
   const [data, setdata] = useState('');
   const [loading, setloading] = useState('');
   const [file, setfile] = useState('') ;
-  const l = 'http://localhost:5000'
+  const from = 'https://kannadaedit.onrender.com'
 
   const handleChange = (e) => {
     // setVideos([...e.target.files]);
@@ -29,13 +32,14 @@ function UploadVideos() {
       formData.append(`video${index + 1}`, file);
     });
 
-   await axios.post(`${l}/upload`,formData, {
+   await axios.post(`${from}/upload`,formData,{
       headers: { "Content-Type": "multipart/form-data" },
     })
     .then((res) => {
         setdata(res.data.filename)
         console.log(res.data.filename)
         setloading('complete')
+       return <VideoPreview />
         
     })
   }else{
@@ -62,28 +66,11 @@ function UploadVideos() {
       <div>
         <hr className="border-2 w-full border-blue-900 mt-1" />
       
-      {
-        data.includes(".mp4") ?
-        <>
-        <div className='flex flex-col items-center md:w-100 w-full md:px-10 border-2 bg-black'>
-          
-         <video width="640" height="360" controls>
-        <source src={`${l}/api/download/${data}`} type="video/mp4" 
-        className='w-full' />
-      </video>
-      <a href={`${l}/api/download/${data}`} > 
-      <button 
-      className='text-white w-full my-5 px-2.5 rounded-4xl py-2.5 bg-sky-500 hover:bg-sky-700 rounded-2 '> 
-        download 
-      </button>
-      </a>
-      </div>
-      </>
-      :
-      <h1>
-        Loading
-      </h1>
-      }
+        <div>
+          <h2>Final Video</h2>
+          <VideoPreview filename={data} />
+          <VideoDownload filename={data} />
+        </div>
       </div>
       </div>
     </div> 
