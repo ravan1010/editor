@@ -32,7 +32,7 @@ function UploadVideos() {
       formData.append(`video${index + 1}`, file);
     });
 
-   await axios.post(`${from}/upload`,formData,{
+   await axios.post(`${i}/upload`,formData,{
       headers: { "Content-Type": "multipart/form-data" },
     })
     .then((res) => {
