@@ -39,7 +39,6 @@ function UploadVideos() {
         setdata(res.data.filename)
         console.log(res.data.filename)
         setloading('complete')
-       return <VideoPreview />
         
     })
   }else{
