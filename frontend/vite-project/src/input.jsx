@@ -9,7 +9,8 @@ function UploadVideos() {
   const [data, setdata] = useState('');
   const [loading, setloading] = useState('');
   const [file, setfile] = useState('') ;
-  const l = 'https://kannadaedit.onrender.com'
+  const l = "https://kannadaedit.onrender.com"
+  
 
   const handleChange = (e) => {
     // setVideos([...e.target.files]);
