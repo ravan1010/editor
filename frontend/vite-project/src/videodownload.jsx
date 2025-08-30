@@ -4,7 +4,7 @@ function VideoDownload({ filename }) {
   const handleDownload = async () => {
     const from = "https://kannadaedit.onrender.com"
     const response = await axios.get(
-      `${from}/api/preview/${filename}`,
+      `${from}/api/preview/${filename}`,{withCredentials: true},
       { responseType: "blob" }
     );
 
